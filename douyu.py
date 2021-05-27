@@ -6,6 +6,7 @@ import time
 import execjs
 import requests
 
+import sys
 
 class DouYu:
 
@@ -115,6 +116,8 @@ class DouYu:
 
 
 if __name__ == '__main__':
-    r = input('输入斗鱼直播间号：\n')
-    s = DouYu(r)
-    print(s.get_real_url())
+    s = DouYu(sys.argv[1])
+    res=s.get_pc_js(rate=sys.argv[2])
+    # https://github.com/wbt5/real-url/issues/150
+    pc_url = res['data']['rtmp_url'] + '/' + res['data']['rtmp_live']
+    print(pc_url)
